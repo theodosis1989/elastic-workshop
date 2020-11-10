@@ -1,0 +1,22 @@
+{
+  "name": "elastic-workshop",
+  "version": "1.0.0",
+  "main": "./dist/elasticIndex.js",
+  "license": "MIT",
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.9.1",
+    "@types/node": "^14.14.7",
+    "array.prototype.flatmap": "^1.2.3",
+    "kafka-node": "^5.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.5.3",
+    "@types/dotenv": "^6.1.1",
+    "dotenv": "^8.1.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node .",
+    "clean": "rm -rf ./dist/*"
+  }
+}
