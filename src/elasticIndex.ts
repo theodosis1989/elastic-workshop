@@ -4,7 +4,6 @@ import { Client } from '@elastic/elasticsearch'
 import dataset from './products'
 
 const indexName = 'products'
-const alias = `${indexName}_${Date.now()}`
 
   const client = new Client({
     node: process.env.ELASTIC_URL,
@@ -16,8 +15,9 @@ const alias = `${indexName}_${Date.now()}`
 
 async function run () {
 
-  console.log(`i will create the index with alias ${alias}`)
+  console.log(`i will create the index ${indexName}`)
 
+  await client.indices.delete({ index: indexName, ignore_unavailable: true })
   await client.indices.create({
     index: indexName,
     body: {
@@ -93,8 +93,6 @@ async function run () {
       }
     },
   }, { ignore: [400] })
-
-  await client.indices.putAlias({ name: alias, index: indexName })
 
   const body = dataset.flatMap((doc: any) => [{ index: { _index: indexName } }, doc])
 
