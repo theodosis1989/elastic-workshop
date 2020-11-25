@@ -10,10 +10,11 @@ Now your index is ready.
 
 When your cluster is provisioned go under Access / Credentials to see your credentials.
 
-Create a `.env` file with the following ENV VARS and add the your credentials there.
-ELASTIC_URL
-ELASTIC_ACCESS_KEY
-ELASTIC_ACCESS_SECRET
+Create a `.env` file with the following ENV VARS and add your credentials there.
+
+- ELASTIC_URL
+- ELASTIC_ACCESS_KEY
+- ELASTIC_ACCESS_SECRET
 
 Go back to the repo and start a terminal.
 Run `yarn build && yarn start`. Now the data are ingested in your index and you are ready to search!
