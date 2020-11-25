@@ -671,6 +671,32 @@ const dataset: any = [
     "expDate": "2020-11-01",
     "status": "in stock",
     "vegan": true,
+  },
+  {
+    "id": 152,
+    "title": "Köttbullar",
+    "type": "meat",
+    "description": "Meatballs are a traditional swedish food",
+    "price": 55.62,
+    "rating": 5,
+    "country": "Sweden",
+    "store": "ICA",
+    "expDate": "2020-12-01",
+    "status": "available",
+    "vegan": false,
+  },
+  {
+    "id": 153,
+    "title": "Janssons",
+    "type": "dairy",
+    "description": "Janssons is a traditional swedish christmas dish",
+    "price": 55.62,
+    "rating": 5,
+    "country": "Sweden",
+    "store": "ICA",
+    "expDate": "2020-12-01",
+    "status": "available",
+    "vegan": false,
   }
 ]
 
