@@ -44,51 +44,62 @@ async function run () {
       },
       mappings: {
         properties: {
+          id: { type: 'integer' },
           title: {
             type: 'text',
-            copy_to: 'title_en'
+            copy_to: 'title_txt_df'
           },
-          title_en: {
+          title_txt_df: {
+            type: 'text',
+            analyzer: 'downcased_and_folded_analyzer'
+          },
+          description: {
+            type: 'text',
+            copy_to: 'description_txt_df'
+          },
+          description_txt_df: {
             type: 'text',
             analyzer: 'downcased_and_folded_analyzer'
           },
           type: {
             type: 'keyword',
-            copy_to: 'type_en',
+            copy_to: 'type_txt_df',
             normalizer: 'downcased_and_folded_normalizer'
           },
-          type_en: {
+          type_txt_df: {
             type: 'text',
             analyzer: 'downcased_and_folded_analyzer'
           },
+          expDate: { type: 'date' },
           country: {
             type: 'keyword',
-            copy_to: ['country_kw', 'country_en']
+            copy_to: ['country_kw_df', 'country_txt_df']
           },
-          country_kw: {
+          country_kw_df: {
             type: 'keyword',
             normalizer: 'downcased_and_folded_normalizer'
           },
-          country_en: {
+          country_txt_df: {
             type: 'text',
             analyzer: 'downcased_and_folded_analyzer',
           },
-          description: {
-            type: 'text',
-            copy_to: 'description_en'
+          quantity: { type: 'integer' },
+          store: {
+            type: 'keyword',
+            copy_to: ['store_txt_df', 'store_kw_df']
           },
-          description_en: {
+          store_txt_df: {
             type: 'text',
             analyzer: 'downcased_and_folded_analyzer'
           },
-          store: {
-            type: 'keyword'
+          store_kw_df: {
+            type: 'keyword',
+            normalizer: 'downcased_and_folded_normalizer'
           },
-          filename: { type: 'text' },
-          height: { type: 'integer'},
-          width: { type: 'integer' },
           price: { type: 'float' },
-          rating: { type: 'integer' }
+          rating: { type: 'integer' },
+          status: { type: 'keyword' },
+          vegan: { type: 'boolean' }
         }
       }
     },
