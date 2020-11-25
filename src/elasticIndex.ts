@@ -8,8 +8,8 @@ const indexName = 'products'
   const client = new Client({
     node: process.env.ELASTIC_URL,
     auth: {
-      username: process.env.ELASTIC_USERNAME || '',
-      password: process.env.ELASTIC_PASSWORD || ''
+      username: process.env.ELASTIC_ACCESS_KEY || '',
+      password: process.env.ELASTIC_ACCESS_SECRET || ''
     }
   })
 
