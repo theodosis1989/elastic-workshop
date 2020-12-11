@@ -17,7 +17,8 @@ async function run () {
 
   console.log(`i will create the index ${indexName}`)
 
-  await client.indices.delete({ index: indexName, ignore_unavailable: true })
+  const exists = await client.indices.exists({ index: indexName })
+  if (exists) await client.indices.delete({ index: indexName, ignore_unavailable: true })
   await client.indices.create({
     index: indexName,
     body: {
