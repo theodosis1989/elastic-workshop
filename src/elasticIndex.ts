@@ -56,12 +56,15 @@ async function run () {
           },
           type: {
             type: 'keyword',
-            copy_to: 'type_txt_df',
-            normalizer: 'downcased_and_folded_normalizer'
+            copy_to: ['type_txt_df', 'type_kw_df']
           },
           type_txt_df: {
             type: 'text',
             analyzer: 'downcased_and_folded_analyzer'
+          },
+          type_kw_df: {
+            type: 'keyword',
+            normalizer: 'downcased_and_folded_normalizer'
           },
           description: {
             type: 'text',
