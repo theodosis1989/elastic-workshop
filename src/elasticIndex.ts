@@ -54,14 +54,6 @@ async function run () {
             type: 'text',
             analyzer: 'downcased_and_folded_analyzer'
           },
-          description: {
-            type: 'text',
-            copy_to: 'description_txt_df'
-          },
-          description_txt_df: {
-            type: 'text',
-            analyzer: 'downcased_and_folded_analyzer'
-          },
           type: {
             type: 'keyword',
             copy_to: 'type_txt_df',
@@ -71,7 +63,16 @@ async function run () {
             type: 'text',
             analyzer: 'downcased_and_folded_analyzer'
           },
-          expDate: { type: 'date' },
+          description: {
+            type: 'text',
+            copy_to: 'description_txt_df'
+          },
+          description_txt_df: {
+            type: 'text',
+            analyzer: 'downcased_and_folded_analyzer'
+          },
+          price: { type: 'float' },
+          rating: { type: 'integer' },
           country: {
             type: 'keyword',
             copy_to: ['country_kw_df', 'country_txt_df']
@@ -84,7 +85,6 @@ async function run () {
             type: 'text',
             analyzer: 'downcased_and_folded_analyzer',
           },
-          quantity: { type: 'integer' },
           store: {
             type: 'keyword',
             copy_to: ['store_txt_df', 'store_kw_df']
@@ -97,8 +97,7 @@ async function run () {
             type: 'keyword',
             normalizer: 'downcased_and_folded_normalizer'
           },
-          price: { type: 'float' },
-          rating: { type: 'integer' },
+          expDate: { type: 'date' },
           status: { type: 'keyword' },
           vegan: { type: 'boolean' }
         }
