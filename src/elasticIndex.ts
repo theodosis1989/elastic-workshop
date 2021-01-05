@@ -29,6 +29,17 @@ async function run () {
           refresh_interval: '30s',
         },
         analysis: {
+          tokenizer: {
+            edgengramtokenizer: {
+              type: "edge_ngram",
+              min_gram: 2,
+              max_gram: 10,
+              token_chars: [
+                "letter",
+                "digit"
+              ]
+            },
+          },
           normalizer: {
             downcased_and_folded_normalizer: {
               type: 'custom',
@@ -39,16 +50,25 @@ async function run () {
             downcased_and_folded_analyzer: {
               tokenizer: 'standard',
               filter: ['lowercase', 'asciifolding'],
+            },
+            autocomplete_analyzer: {
+              tokenizer: 'edgengramtokenizer',
+              filter: ['lowercase', 'asciifolding'],
             }
           },
         },
       },
       mappings: {
         properties: {
-          id: { type: 'integer' },
+          id: { type: 'integer', copy_to: 'id_txt' },
+          id_txt: { type: 'text' },
           title: {
             type: 'text',
-            copy_to: 'title_txt_df'
+            copy_to: ['title_txt_df', 'title_edgengram']
+          },
+          title_edgengram: {
+            type: 'text',
+            analyzer: 'autocomplete_analyzer'
           },
           title_txt_df: {
             type: 'text',
