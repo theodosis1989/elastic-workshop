@@ -60,8 +60,7 @@ async function run () {
       },
       mappings: {
         properties: {
-          id: { type: 'integer', copy_to: 'id_txt' },
-          id_txt: { type: 'text' },
+          id: { type: 'integer' },
           title: {
             type: 'text',
             copy_to: ['title_txt_df', 'title_edgengram']
@@ -74,52 +73,12 @@ async function run () {
             type: 'text',
             analyzer: 'downcased_and_folded_analyzer'
           },
-          type: {
-            type: 'keyword',
-            copy_to: ['type_txt_df', 'type_kw_df']
-          },
-          type_txt_df: {
-            type: 'text',
-            analyzer: 'downcased_and_folded_analyzer'
-          },
-          type_kw_df: {
-            type: 'keyword',
-            normalizer: 'downcased_and_folded_normalizer'
-          },
-          description: {
-            type: 'text',
-            copy_to: 'description_txt_df'
-          },
-          description_txt_df: {
-            type: 'text',
-            analyzer: 'downcased_and_folded_analyzer'
-          },
+          type: { type: 'keyword' },
+          description: { type: 'text' },
           price: { type: 'float' },
           rating: { type: 'integer' },
-          country: {
-            type: 'keyword',
-            copy_to: ['country_kw_df', 'country_txt_df']
-          },
-          country_kw_df: {
-            type: 'keyword',
-            normalizer: 'downcased_and_folded_normalizer'
-          },
-          country_txt_df: {
-            type: 'text',
-            analyzer: 'downcased_and_folded_analyzer',
-          },
-          store: {
-            type: 'keyword',
-            copy_to: ['store_txt_df', 'store_kw_df']
-          },
-          store_txt_df: {
-            type: 'text',
-            analyzer: 'downcased_and_folded_analyzer'
-          },
-          store_kw_df: {
-            type: 'keyword',
-            normalizer: 'downcased_and_folded_normalizer'
-          },
+          country: { type: 'keyword' },
+          store: { type: 'keyword' },
           expDate: { type: 'date' },
           status: { type: 'keyword' },
           vegan: { type: 'boolean' }
