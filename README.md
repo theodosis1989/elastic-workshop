@@ -5,10 +5,12 @@ Make an account at `https://bonsai.io/`
 - Create a new free sandox cluster (the name can be whatever). Click `Create Cluster`and now it starts provisioning.
 - Now you are in the cluster menu.
 - Go under Access / Credentials to see your credentials.
-- Create a `.env` file in the repo with the following ENV VARS and add your credentials there.
-  - ELASTIC_URL
-  - ELASTIC_ACCESS_KEY
-  - ELASTIC_ACCESS_SECRET
+- Create a `.env` file in the current repo with the following ENV VARS and add your credentials there. It should look like this:
+  ```
+  ELASTIC_URL=
+  ELASTIC_ACCESS_KEY=
+  ELASTIC_ACCESS_SECRET=
+  ```
 - Go back to the repo and start a terminal.
 - Run `yarn build && yarn start`. Now the data are ingested in your index and you are ready to search!
 
