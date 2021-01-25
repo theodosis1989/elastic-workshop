@@ -1,3 +1,7 @@
+# REQUIREMENTS
+
+- You need to have `yarn` and `typescript` installed.
+
 # INSTRUCTIONS ON HOW TO SET UP THE PROJECT AND CREATE THE ELASTIC INDEX
 
 Make an account at `https://bonsai.io/`
@@ -12,12 +16,13 @@ Make an account at `https://bonsai.io/`
   ELASTIC_ACCESS_SECRET=
   ```
 - Go back to the repo and start a terminal.
+- Run `yarn` to install all dependecies.
 - Run `yarn build && yarn start`. Now the data are ingested in your index and you are ready to search!
 
 # HOW TO START SEARCHING AFTER INDEXING
 
-- Go to the cluster menu.
-- Bottom left click on Kibana. Now Kibana has started.
-- On the left bar, click the wrench (Dev Tools)
-- On the Kibana console type `GET /products/_search` and click the green 'play' button to execute the request.
+- Go to you bonsai cluster (Click OVERVIEW).
+- Bottom left click on Kibana. This will open a new instance of Kibana running in your browser.
+- On the left bar in Kibana, click the wrench (Dev Tools)
+- In the Dev Tools console, remove everything and type `GET /products/_search` followed by the green 'play' button to execute the request.
 - Now all the data that we added in Elastic (the content of the `products.ts` file in the repo) should appear!
