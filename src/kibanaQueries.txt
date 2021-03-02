@@ -67,6 +67,31 @@ GET /products/_analyze
 
 =============== END OF KEYWORDS SLIDE ===============
 
+=============== START OF MATCH TERM QUERIES ===============
+
+GET /products/_search
+{
+  "query": {
+    "term": {
+      "store": {
+        "value": "LIDL"
+      }
+    }
+  }
+}
+
+GET /products/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "köttbuLLar",
+      "fields": ["title"]
+    }
+  }
+}
+
+=============== END OF MATCH TERM QUERIES ===============
+
 =============== START OF BOOL QUERIES ===============
 
 GET /products/_search
