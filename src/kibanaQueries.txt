@@ -157,3 +157,34 @@ GET /products/_search
     }
   }
 }
+
+=============== END OF BOOL QUERIES ===============
+
+=============== START OF AGGREGATIONS ===============
+
+GET /products/_search
+{
+  "size": 0, 
+  "aggs": {
+    "type": {
+      "terms": {
+        "field": "country"
+      }
+    },
+    "store": {
+      "terms": {
+        "field": "store"
+      }
+    },
+    "price_ranges": {
+      "range": {
+        "field": "price",
+        "ranges": [
+          { "to": 18 },
+          { "from": 18, "to": 25 },
+          { "from": 25 }
+        ]
+      }
+    }
+  }
+}
