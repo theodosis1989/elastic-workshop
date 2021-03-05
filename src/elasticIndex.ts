@@ -29,6 +29,12 @@ async function run () {
           refresh_interval: '30s',
         },
         analysis: {
+          filter: {
+            english_stemmer: {
+              type: "stemmer",
+              language: "english"
+            }
+          },
           tokenizer: {
             edgengramtokenizer: {
               type: "edge_ngram",
@@ -54,6 +60,10 @@ async function run () {
             autocomplete_analyzer: {
               tokenizer: 'edgengramtokenizer',
               filter: ['lowercase', 'asciifolding'],
+            },
+            stemming_analyzer: {
+              tokenizer: 'standard',
+              filter: ['lowercase', 'english_stemmer'],
             }
           },
         },
@@ -63,7 +73,7 @@ async function run () {
           id: { type: 'integer' },
           title: {
             type: 'text',
-            copy_to: ['title_txt_df', 'title_edgengram']
+            copy_to: ['title_txt_df', 'title_edgengram', 'title_english_stemmer']
           },
           title_edgengram: {
             type: 'text',
@@ -72,6 +82,10 @@ async function run () {
           title_txt_df: {
             type: 'text',
             analyzer: 'downcased_and_folded_analyzer'
+          },
+          title_english_stemmer: {
+            type: 'text',
+            analyzer: 'stemming_analyzer'
           },
           type: { type: 'keyword' },
           description: { type: 'text' },
