@@ -701,6 +701,7 @@ const dataset: any = [
     "expDate": "2020-12-01",
     "status": "available",
     "vegan": false,
+    "email": "theodosis@gmail.com"
   }
 ]
 

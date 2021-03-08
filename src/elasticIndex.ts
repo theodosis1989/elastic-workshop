@@ -39,10 +39,12 @@ async function run () {
             edgengramtokenizer: {
               type: "edge_ngram",
               min_gram: 2,
-              max_gram: 10,
+              max_gram: 20,
               token_chars: [
                 "letter",
-                "digit"
+                "digit",
+                "punctuation",
+                "symbol"
               ]
             },
           },
@@ -71,31 +73,18 @@ async function run () {
       mappings: {
         properties: {
           id: { type: 'integer' },
-          title: {
-            type: 'text',
-            copy_to: ['title_txt_df', 'title_edgengram', 'title_english_stemmer']
-          },
-          title_edgengram: {
-            type: 'text',
-            analyzer: 'autocomplete_analyzer'
-          },
-          title_txt_df: {
-            type: 'text',
-            analyzer: 'downcased_and_folded_analyzer'
-          },
-          title_english_stemmer: {
-            type: 'text',
-            analyzer: 'stemming_analyzer'
-          },
+          title: { type: 'text', analyzer: 'downcased_and_folded_analyzer', copy_to: ['title_autocomplete'] },
+          title_autocomplete: { type: 'text', analyzer: 'autocomplete_analyzer' },
           type: { type: 'keyword' },
-          description: { type: 'text' },
+          description: { type: 'text', analyzer: 'downcased_and_folded_analyzer' },
           price: { type: 'float' },
           rating: { type: 'integer' },
           country: { type: 'keyword' },
           store: { type: 'keyword' },
           expDate: { type: 'date' },
           status: { type: 'keyword' },
-          vegan: { type: 'boolean' }
+          vegan: { type: 'boolean' },
+          email: { type: 'text', analyzer: 'autocomplete_analyzer', search_analyzer: 'keyword' }
         }
       }
     },
@@ -132,3 +121,20 @@ async function run () {
 }
 
 run().catch(console.log)
+
+          // title: {
+          //   type: 'text',
+          //   copy_to: ['title_txt_df', 'title_edgengram', 'title_english_stemmer']
+          // },
+          // title_edgengram: {
+          //   type: 'text',
+          //   analyzer: 'autocomplete_analyzer'
+          // },
+          // title_txt_df: {
+          //   type: 'text',
+          //   analyzer: 'downcased_and_folded_analyzer'
+          // },
+          // title_english_stemmer: {
+          //   type: 'text',
+          //   analyzer: 'stemming_analyzer'
+          // },
