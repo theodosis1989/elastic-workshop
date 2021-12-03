@@ -1,0 +1,190 @@
+=============== START OF TEXT ANALYSIS SLIDE ===============
+
+title: "Köttbullar"
+description: "Meatballs are a traditional swedish food"
+
+GET /products/_analyze
+{
+  "text": "Meatballs are a traditional swedish food",
+  "tokenizer": "whitespace"
+}
+
+GET /products/_analyze
+{
+  "text": "Köttbullar",
+  "tokenizer": "whitespace",
+}
+
+GET /products/_analyze
+{
+  "text": "Meatballs are a traditional swedish food",
+  "tokenizer": "whitespace",
+  "filter": ["lowercase"]
+}
+
+GET /products/_analyze
+{
+  "text": "Köttbullar are a traditional swedish food",
+  "analyzer": "standard"
+}
+
+Exercise 1
+"Köttbullar is a traditional Swedish food" => ["kottbullar", "is", "a", "traditional", "swedish", "food"]
+(Hint: google for an elasticsearch (token) filter that folds ascii characters)
+
+Exercise 2
+ - "Köttbullar - Meatballs is a traditional Swedish food" => ["kottbullar", "-", "meatballs", "is", "a", "traditional", "swedish", "food"]
+ - "Köttbullar - Meatballs is a traditional Swedish food" => ["kottbullar", "meatballs", "is", "a", "traditional", "swedish", "food"]
+
+GET /products/_analyze
+{
+  "text": "Köttbullar",
+  "tokenizer": "standard"
+}
+
+GET /products/_analyze
+{
+  "text": "Köttbullar",
+  "tokenizer": "edgengramtokenizer"
+}
+
+=============== END OF TEXT ANALYSIS SLIDE ===============
+
+=============== START OF KEYWORDS SLIDE ===============
+
+GET /products/_analyze
+{
+  "text": "Köttbullar are a traditional swedish food",
+  "analyzer": "keyword"
+}
+
+GET /products/_analyze
+{
+  "text": "Köttbullar are a traditional swedish food",
+  "tokenizer": "keyword",
+  "filter": ["lowercase"]
+}
+
+=============== END OF KEYWORDS SLIDE ===============
+
+=============== START OF MATCH TERM QUERIES ===============
+
+GET /products/_search
+{
+  "query": {
+    "term": {
+      "store": {
+        "value": "LIDL"
+      }
+    }
+  }
+}
+
+GET /products/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "köttbuLLar",
+      "fields": ["title"]
+    }
+  }
+}
+
+=============== END OF MATCH TERM QUERIES ===============
+
+=============== START OF BOOL QUERIES ===============
+
+GET /products/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "multi_match": {
+            "query": "köttbullar",
+            "fields": ["title"]
+          }
+        }
+      ]
+    }
+  }
+}
+
+GET /products/_search
+{
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "country": "Sweden"
+          }
+        }
+      ]
+    }
+  }
+}
+
+GET /products/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "term": {
+            "country": {
+              "value": "Sweden",
+              "boost": 2
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+GET /products/_search
+{
+  "query": {
+    "bool": {
+      "must_not": [
+        {
+          "term": {
+            "country": "Sweden"
+          }
+        }
+      ]
+    }
+  }
+}
+
+=============== END OF BOOL QUERIES ===============
+
+=============== START OF AGGREGATIONS ===============
+
+GET /products/_search
+{
+  "size": 0, 
+  "aggs": {
+    "type": {
+      "terms": {
+        "field": "country"
+      }
+    },
+    "store": {
+      "terms": {
+        "field": "store"
+      }
+    },
+    "price_ranges": {
+      "range": {
+        "field": "price",
+        "ranges": [
+          { "to": 18 },
+          { "from": 18, "to": 25 },
+          { "from": 25 }
+        ]
+      }
+    }
+  }
+}
